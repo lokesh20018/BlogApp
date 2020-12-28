@@ -1,0 +1,13 @@
+.container.main {
+    margin-top: 5em ;
+}
+i.icon  {
+    font-style: 2em ;
+}
+body {
+   /* padding-top : 30px ;*/
+   
+}
+#DELETE {
+    display: inline;
+}
