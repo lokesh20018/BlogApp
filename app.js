@@ -131,7 +131,7 @@ app.delete("/blogs/:id" , function(req , res){
     })
 })
 
-app.listen("2000" , function(){
+app.listen("80" , function(){
     console.log("connected to the server !!") ;
 })
 
