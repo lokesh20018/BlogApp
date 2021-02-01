@@ -131,7 +131,7 @@ app.delete("/blogs/:id" , function(req , res){
     })
 })
 
-app.listen("80" , function(){
+app.listen(process.env.PORT , function(){
     console.log("connected to the server !!") ;
 })
 
