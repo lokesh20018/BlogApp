@@ -2,9 +2,19 @@ var express = require("express") ;
 var bodyParser = require("body-parser") ;
 var override = require("method-override");
 var sanitizer = require("express-sanitizer") ;
-app = express() ;
+var app = express() ;
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/blogApp', {
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://first_user:o6UHfjjHywCQ00Pf@cluster0.sl13a.mongodb.net/<dbname>?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+
+mongoose.connect('mongodb+srv://first_user:o6UHfjjHywCQ00Pf@cluster0.sl13a.mongodb.net/<dbname>?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
