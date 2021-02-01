@@ -37,9 +37,9 @@ var blogSchema = new mongoose.Schema({
 })
 var Blog = mongoose.model("Blog" , blogSchema) ;
 // routes.....
-app.get("/" , function(req,res){
-    res.redirect("/blogs") ;
-})
+// app.get("/" , function(req,res){
+//    res.redirect("/blogs") ;
+// }) 
 
 // index route.... 
 app.get("/blogs" , function(req ,res){
