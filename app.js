@@ -2,11 +2,12 @@ var express = require("express") ;
 var bodyParser = require("body-parser") ;
 var override = require("method-override");
 var sanitizer = require("express-sanitizer") ;
+var env = require('dotenv').config()
 var app = express() ;
 const mongoose = require('mongoose');
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://first_user:o6UHfjjHywCQ00Pf@cluster0.sl13a.mongodb.net/<dbname>?retryWrites=true&w=majority";
+const uri = process.env.dbUrl ;
 const client = new MongoClient(uri, { useNewUrlParser: true });
 client.connect(err => {
   const collection = client.db("test").collection("devices");
@@ -14,7 +15,7 @@ client.connect(err => {
   client.close();
 });
 
-mongoose.connect('mongodb+srv://first_user:o6UHfjjHywCQ00Pf@cluster0.sl13a.mongodb.net/<dbname>?retryWrites=true&w=majority', {
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
@@ -130,8 +131,8 @@ app.delete("/blogs/:id" , function(req , res){
         }
     })
 })
-
-app.listen(process.env.PORT , function(){
+var port = process.env.PORT || 2000 ;
+app.listen(port , function(){
     console.log("connected to the server !!") ;
 })
 
