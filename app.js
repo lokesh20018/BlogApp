@@ -5,15 +5,7 @@ var sanitizer = require("express-sanitizer") ;
 var env = require('dotenv').config()
 var app = express() ;
 const mongoose = require('mongoose');
-
-const MongoClient = require('mongodb').MongoClient;
 const uri = process.env.dbUrl ;
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
@@ -93,7 +85,7 @@ app.get("/blogs/:id" , function(req , res){
 
 
 // EDIT route...
-app.get("/blogs/:id/edit" , function(req , res){
+/*app.get("/blogs/:id/edit" , function(req , res){
     Blog.findById(req.params.id , function(err , foundBlog){
         if(err){
             res.redirect("/") ;
@@ -130,8 +122,8 @@ app.delete("/blogs/:id" , function(req , res){
             res.redirect("/blogs") ;
         }
     })
-})
-var port = process.env.PORT || 2000 ;
+})*/
+var port = process.env.PORT || 2000  ;
 app.listen(port , function(){
     console.log("connected to the server !!") ;
 })
