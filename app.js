@@ -125,6 +125,9 @@ app.delete("/blogs/:id" , function(req , res){
         }
     })
 })
+app.get("/lol" , (req,res) => {
+    res.send("you got into lol") ; 
+})
 var port = process.env.PORT || 2000  ;
 app.listen(port , function(){
     console.log("connected to the server !!") ;
