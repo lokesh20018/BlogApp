@@ -7,6 +7,8 @@ var app = express() ;
 const mongoose = require('mongoose');
 const uri = process.env.dbUrl ;
 
+
+
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -14,12 +16,39 @@ mongoose.connect(uri, {
 .then(() => console.log('Connected to the DataBase!'))
 .catch(error => console.log(error.message));
 
+/////////////
+
+const User = require('./models/user');
+
+/////////////
+
+
+var passport = require('passport') , LocalStrategy = require('passport-local').Strategy;
+// use static authenticate method of model in LocalStrategy
+passport.use(new LocalStrategy(User.authenticate()));
+
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+
 app.use(express.json()) ;
 app.set("view engine" , "ejs") ;
 app.use(express.static("public")) ;
 app.use(bodyParser.urlencoded({extended: true})) ;
 app.use(override("_method")) ; // to listen for a put request and a delete request..
 app.use(sanitizer()) ;
+
+//// for auth
+
+var session = require("express-session");
+
+app.use(express.static("public"));
+app.use(session({ secret: "cats" }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 // basic setup is done.....
 // mongoose setup...
 var blogSchema = new mongoose.Schema({
@@ -31,11 +60,52 @@ var blogSchema = new mongoose.Schema({
 })
 var Blog = mongoose.model("Blog" , blogSchema) ;
 
+
+
+
 // routes.....
+
+app.get("/register" , (req , res) => {
+    res.render("register") ; 
+})
+
+app.post("/register" , (req,res) => {
+    User.register(new User({username: req.body.username}) ,  req.body.password , function(err) {
+        if (err) {
+          console.log('error while user register!', err);
+          res.render('ar') ;
+          
+        }
+        else {
+            console.log('user registered!');
+    
+        res.redirect('/');
+        }
+        
+      } );
+})
+
+app.get("/login" , (req,res)=> {
+    res.render("login") ; 
+})
+
+app.post('/login', passport.authenticate('local',{ successRedirect : '/',
+failureRedirect : '/login' } ),  (req , res ) => {
+    passport.serializeUser(User.serializeUser());
+  });
+
  app.get("/" , function(req,res){
     res.redirect("/blogs") ;
 }) 
 
+
+app.get("/logout" , (req, res)=> {
+    res.render("logout");
+})
+app.post("/logout" , (req , res)=> {
+    req.session.destroy(); 
+    res.send("logged out") ; 
+})
 // index route.... 
 app.get("/blogs" , function(req ,res){
     Blog.find({} , function(err , blogs){

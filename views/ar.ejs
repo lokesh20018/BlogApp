@@ -1,0 +1,26 @@
+<%- include("partials/header") %>
+
+<div class="ui main text container segment">
+    <div class="ui huge header">Sign UP</div>
+    <p>User already registered with this name choose another name...</p>
+    <form action="/register" method="post" class="ui form">
+        <div class="field">
+            <label>User ID</label>
+            
+            <input type="text" name = "username">
+        </div>
+        <div class="field">
+            <label>Password</label>
+            
+            <input type="password" name = "password">
+        </div>
+        
+        
+        <button class="ui big black button">SignUP</button>
+        
+            
+    </form>
+</div>
+
+
+<%- include("partials/footer") %>
