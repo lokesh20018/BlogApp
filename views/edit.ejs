@@ -4,11 +4,13 @@
     <form action="/blogs/<%= blog._id %>?_method=PUT" method="post" class="ui form">
         <div class="field">
             <label>Title</label>
-            <input type="text" name="blog[title]" value= <%= blog.title %>>
+            
+            <textarea name="blog[title]" id="" cols="30" rows="1"   > <%= blog.title %> </textarea>
         </div>
         <div class="field">
             <label>Image</label>
-            <input type="text" name="blog[image]" value=<%= blog.image %>>
+            
+            <textarea name="blog[image]" id="" cols="30" rows="1"   > <%= blog.image %> </textarea>
         </div>
         <div class="field">
             <label>Body of the post</label>
@@ -16,7 +18,8 @@
         </div>
         <div class="field">
             <label>Author</label>
-            <input type="text" name="blog[author]" value=<%= blog.author %>>
+            
+            <textarea name="blog[author]" id="" cols="30" rows="1"   > <%= blog.author %> </textarea>
         </div>
         
         <button class="ui big black button">Submit</button>
