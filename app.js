@@ -30,6 +30,7 @@ var blogSchema = new mongoose.Schema({
     created : {type : Date , default:Date.now}
 })
 var Blog = mongoose.model("Blog" , blogSchema) ;
+
 // routes.....
  app.get("/" , function(req,res){
     res.redirect("/blogs") ;
@@ -61,7 +62,7 @@ app.post("/blogs" , function(req, res) {
         if(err){
             res.render("new") ;
         }
-            //then , return to the index 
+            //else return to the index 
 
         else {
             res.redirect("/blogs") ;
