@@ -32,7 +32,6 @@ var blogSchema = new mongoose.Schema({
     title: String ,
     image:String ,
     body : String ,
-    author:String,
     created : {type : Date , default:Date.now}
 })
 var Blog = mongoose.model("Blog" , blogSchema) ;
@@ -134,4 +133,3 @@ var port = process.env.PORT || 2000  ;
 app.listen(port , function(){
     console.log("connected to the server !!") ;
 })
-// check
