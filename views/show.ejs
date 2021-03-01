@@ -15,17 +15,18 @@
             </div>
             <br>
             <div class="description" >
-                <p> <%= blog.author.username  %> </p>
+                <p> <%= blog.author.username %></p>
             </div>
             <br>
             
-             <a class="ui basic button" href="/blogs/<%= blog._id %>/edit">Edit</a> 
-             <form id="DELETE" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST"> 
-             <button class="ui red basic button">Delete</button> 
+            <a class="ui basic button" href="/blogs/<%= blog._id %>/edit">Edit</a> 
+            <form id="DELETE" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST"> 
+            <button class="ui red basic button">Delete</button> 
             
                 
                 
             </form>
+            
         </div>
     </div>  
 </div>

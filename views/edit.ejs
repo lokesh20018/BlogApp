@@ -19,7 +19,9 @@
         <div class="field">
             <label>Author</label>
             
-            <textarea name="blog[author]" id="" cols="30" rows="1"   > <%= blog.author %> </textarea>
+            <div class="description" >
+                <p> <%= blog.author.username %></p>
+            </div>
         </div>
         
         <button class="ui big black button">Submit</button>

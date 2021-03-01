@@ -11,7 +11,8 @@ const flash = require("connect-flash") ;
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify:false
 })
 .then(() => console.log('Connected to the DataBase!'))
 .catch(error => console.log(error.message));
@@ -40,6 +41,7 @@ app.use(sanitizer()) ;
 
 var session = require("express-session");
 const user = require("./models/user");
+const { render } = require("pug");
 
 app.use(express.static("public"));
 app.use(session({ secret: "cats" , 
@@ -168,22 +170,21 @@ app.post("/blogs" , isLoggedIn , function(req, res) {
 })
 
 // show route (/dogs/:id)
-app.get("/blogs/:id" ,  isLoggedIn , async function(req , res){
+app.get("/blogs/:id" ,   async function(req , res , ){
     // id for each of the post is used from the DB and then , passed with the 
     // request here we use that ID to extract the same stuff from our DB..
-    const foundBlog = await Blog.findById(req.params.id ) ;
+    try{const blog = await Blog.findById(req.params.id ).populate("author") ;
 
-    if(!foundBlog){
-        res.redirect("/blogs") ;
+    if(!blog){
+       return  res.redirect("/blogs") ;
     }
-    else{
-         
-        console.log(foundBlog) ;
-        console.log(typeof(foundBlog)) ;
-        
+        console.log(blog) ;
+        console.log(typeof(blog)) ;
         //res.send(foundBlog);
-        res.render("show" , {blog : foundBlog}) ;
-    }
+       return  res.render("show" , {blog}) ;
+}catch(e){
+    //console.log(e) ;
+}
 })
 
 
