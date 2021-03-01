@@ -19,11 +19,20 @@
     <body>
         <div class = "ui fixed inverted menu">
             <div class="ui container">
-                
+                <div class="header item" > <i class="code icon"></i>Blog Site</div>
                 <a href="/" class="item">Home</a>
                 <a href="/blogs/new" class="item">New Post</a>
-                <div class="header item" "> <i class="code icon"></i>Blog Site</div>
-                <a href="/register" class="item" >Sign Up</a>
-                <a href="/login" class="item" >Log in</a>
+                
+                <div class="ui inverted menu" style="margin-left: auto;">
+                    <% if(!currentUser) { %>
+                    <a href="/login" class="item">Login</a>
+                    <a href="/register" class="item">Signup</a>
+                    
+                    <% } else { %>
+                        <div class="header item" "><b> Hi! <%= currentUser.username %> </b> </div>
+                        <a href="/logout" class="item">logout</a>
+                    <%  } %>
+                </div>
             </div>
+            
         </div>
