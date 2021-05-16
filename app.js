@@ -170,10 +170,10 @@ app.post("/blogs" , isLoggedIn , function(req, res) {
 })
 
 // show route (/dogs/:id)
-app.get("/blogs/:id" ,   async function(req , res , ){
+app.get("/blogs/:id" , isLoggedIn ,  async function(req , res , ){
     // id for each of the post is used from the DB and then , passed with the 
     // request here we use that ID to extract the same stuff from our DB..
-    try{const blog = await Blog.findById(req.params.id ).populate("author") ;
+    try{const blog =  await Blog.findById(req.params.id ).populate("author") ;
 
     if(!blog){
        return  res.redirect("/blogs") ;
