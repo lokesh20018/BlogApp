@@ -113,14 +113,6 @@ app.put("/blogs/:id" , function(req,res){
     })
 })
 
-app.get("/recur" , function(req ,res){
-    setTimeout(() => {  
-      let url = "https://lokesh20018.github.io/recur/recur.html";
-      window.location.href = url;
-   }, 5000);
-  res.send("ok recur") ; 
-})
-
 // DESTROY route...
 app.delete("/blogs/:id" , function(req , res){
     // destroy blog 
