@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: young-meadow-49009.herokuapp.com
+Token: a1dead2c40c3b8065a4eb23a1a40a0b859fbc6275a63619b9a7860ad598d1591
